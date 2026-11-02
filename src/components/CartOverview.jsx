@@ -1,30 +1,54 @@
+"use client";
+import useStore from "@/store/cart";
 import Image from "next/image";
 import AddRemoveButton from "./AddRemoveButton";
 
-const CartOverview = ({ image, price, title }) => {
+const CartOverview = () => {
+  const { cart } = useStore();
+
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
   return (
-    <div className=" grid grid-cols-6 font-bold text-xl">
-      <p className="col-start-2">Products</p>
-      <p className="col-start-5">Quantity</p>
-      <p className="col-start-6">Total Price</p>
+    <div>
+      <div className=" grid grid-cols-6 font-bold text-xl">
+        <p className="col-start-2">Products</p>
+        <p className="col-start-5">Quantity</p>
+        <p className="col-start-6">Total Price</p>
+      </div>
 
-      <section className="h-1 bg-[#939B93] col-start-1 col-end-7 rounded-2xl mt-1"></section>
+      <div className="h-1 bg-[#939B93] rounded-2xl mt-1 mb-6"></div>
+      {cart.length === 0 ? (
+        <p className="text-center text-[#939B93]">Your cart is empty</p>
+      ) : (
+        <ul className="flex flex-col gap-6">
+          {cart.map((item) => (
+            <li key={item.id} className="grid grid-cols-6 items-center">
+              <Image
+                src={item.image}
+                alt={item.title}
+                width={100}
+                height={100}
+              />
+              <h2 className="col-start-2 col-end-5 text-lg">{item.title}</h2>
 
-      <ul>
-        <li>
-          <Image
-            src={image}
-            alt="Product Image"
-            width={100}
-            height={100}
-            className="col-start-2 col-end-6"
-          />
-          <h1>{title}</h1>
-
-          <AddRemoveButton className="col-start-4 col-end-5" />
-          <p className="col-start-6 col-end-7">{price}</p>
-        </li>
-      </ul>
+              <AddRemoveButton
+                id={item.id}
+                title={item.title}
+                price={item.price}
+                image={item.image}
+              />
+              <p className="col-start-6">
+                {(item.price * item.quantity).toFixed(2)} $
+              </p>
+            </li>
+          ))}
+        </ul>
+      )}
+      {cart.length > 0 && (
+        <p className="text-2xl font-semibold mt-8 text-right">
+          Total: {total.toFixed(2)} $
+        </p>
+      )}
     </div>
   );
 };

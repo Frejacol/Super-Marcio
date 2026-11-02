@@ -23,7 +23,7 @@ const ProductCard = ({ id, title, price, image }) => {
           {price} $
         </p>
 
-        <AddRemoveButton />
+        <AddRemoveButton id={id} title={title} price={price} image={image} />
       </div>
     </article>
   );
