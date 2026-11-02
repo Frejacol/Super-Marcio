@@ -4,7 +4,7 @@ import PageTitle from "@/components/PageTitle";
 import ProductList from "@/components/ProductList";
 
 export default async function Groceries({ searchParams }) {
-  const { tag } = await searchParams;
+  const { tag, query } = await searchParams;
   return (
     <>
       <div className="grid grid-cols-3 items-center p-8">
@@ -15,7 +15,7 @@ export default async function Groceries({ searchParams }) {
         </div>
       </div>
       <Suspense fallback={<div className="mt-6">Loading...</div>}>
-        <ProductList tag={tag} />
+        <ProductList tag={tag} query={query} />
       </Suspense>
     </>
   );
