@@ -17,16 +17,11 @@ const ProductPage = async ({ params }) => {
       </div>
       <TitleSections title="Product Reviews" />
 
-        <ul className="mt-4 flex grid grid-cols-3 gap-4">
-          {product.reviews.map((review, index) => (
-            <ReviewCard
-              key={index}
-              rating={review.rating}
-              comment={review.comment}
-              reviewerName={review.reviewerName}
-            />
-          ))}
-       </ul>
+      <ul className="mt-4 grid grid-cols-3 gap-4">
+        {product.reviews.map((review, index) => (
+          <ReviewCard key={index} rating={review.rating} comment={review.comment} reviewerName={review.reviewerName} />
+        ))}
+      </ul>
     </Suspense>
   );
 };
