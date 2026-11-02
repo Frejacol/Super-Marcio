@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import AddRemoveButton from "./AddRemoveButton";
 
 const ProductCard = ({ id, title, price, image }) => {
   return (
@@ -18,8 +19,11 @@ const ProductCard = ({ id, title, price, image }) => {
         />
       </Link>
       <div className="flex rounded-b-2xl bg-[#BAC4BA] p-5 justify-between">
-        <p className="font-bold">{price} $</p>
-        <p>+</p>
+        <p className="font-bold flex justify-center items-center text-xl">
+          {price} $
+        </p>
+
+        <AddRemoveButton />
       </div>
     </article>
   );
