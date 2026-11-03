@@ -2,6 +2,7 @@
 import useStore from "@/store/cart";
 import Image from "next/image";
 import AddRemoveButton from "./AddRemoveButton";
+import CheckoutBtn from "./CheckoutBtn";
 
 const CartOverview = () => {
   const { cart } = useStore();
@@ -23,31 +24,20 @@ const CartOverview = () => {
         <ul className="flex flex-col gap-6">
           {cart.map((item) => (
             <li key={item.id} className="grid grid-cols-6 items-center">
-              <Image
-                src={item.image}
-                alt={item.title}
-                width={100}
-                height={100}
-              />
+              <Image src={item.image} alt={item.title} width={100} height={100} />
               <h2 className="col-start-2 col-end-5 text-lg">{item.title}</h2>
 
-              <AddRemoveButton
-                id={item.id}
-                title={item.title}
-                price={item.price}
-                image={item.image}
-              />
-              <p className="col-start-6">
-                {(item.price * item.quantity).toFixed(2)} $
-              </p>
+              <AddRemoveButton id={item.id} title={item.title} price={item.price} image={item.image} />
+              <p className="col-start-6">{(item.price * item.quantity).toFixed(2)} $</p>
             </li>
           ))}
         </ul>
       )}
       {cart.length > 0 && (
-        <p className="text-2xl font-semibold mt-8 text-right">
-          Total: {total.toFixed(2)} $
-        </p>
+        <div className="flex justify-between items-center mt-8">
+          <p className="text-2xl font-semibold">Total: ${total.toFixed(2)}</p>
+          <CheckoutBtn />
+        </div>
       )}
     </div>
   );
