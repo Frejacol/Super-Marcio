@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import SearchSection from "@/components/SearchSection";
 import PageTitle from "@/components/PageTitle";
 import ProductList from "@/components/ProductList";
+import Loading from "@/components/Loading";
 
 export default async function Groceries({ searchParams }) {
   const { tag, query } = await searchParams;
@@ -14,7 +15,7 @@ export default async function Groceries({ searchParams }) {
           <SearchSection />
         </div>
       </div>
-      <Suspense fallback={<div className="mt-6">Loading...</div>}>
+      <Suspense fallback={<Loading />}>
         <ProductList tag={tag} query={query} />
       </Suspense>
     </>
