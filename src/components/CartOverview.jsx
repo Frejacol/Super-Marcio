@@ -31,12 +31,14 @@ const CartOverview = () => {
               />
               <h2 className="col-start-2 col-end-5 text-lg">{item.title}</h2>
 
-              <AddRemoveButton
-                id={item.id}
-                title={item.title}
-                price={item.price}
-                image={item.image}
-              />
+              <div className="col-start-5 flex">
+                <AddRemoveButton
+                  id={item.id}
+                  title={item.title}
+                  price={item.price}
+                  image={item.image}
+                />
+              </div>
               <p className="col-start-6">
                 {(item.price * item.quantity).toFixed(2)} $
               </p>
